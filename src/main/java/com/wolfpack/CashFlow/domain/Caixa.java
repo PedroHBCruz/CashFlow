@@ -21,15 +21,15 @@ public class Caixa implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	private Integer ValorInicialCaixa;
+	private double valorInicialCaixa;
 	
 	@ManyToOne
 	@JoinColumn(name = "fk_id_tipoInsercao")
 	private TipoInsercao insercao;
 	
-	private Integer valor;
+	private double valor;
 	
-	@JsonFormat(pattern = "dd/MM/yyyy")
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy")
 	private Date dataInsercao;
 	
 	@ManyToOne
@@ -46,12 +46,12 @@ public class Caixa implements Serializable {
 		this.id = id;
 	}
 
-	public Integer getValorInicialCaixa() {
-		return ValorInicialCaixa;
+	public double getValorInicialCaixa() {
+		return valorInicialCaixa;
 	}
 
-	public void setValorInicialCaixa(Integer valorInicialCaixa) {
-		ValorInicialCaixa = valorInicialCaixa;
+	public void setValorInicialCaixa(double valorInicialCaixa) {
+		this.valorInicialCaixa = valorInicialCaixa;
 	}
 
 	public TipoInsercao getInsercao() {
@@ -62,11 +62,11 @@ public class Caixa implements Serializable {
 		this.insercao = insercao;
 	}
 
-	public Integer getValor() {
+	public double getValor() {
 		return valor;
 	}
 
-	public void setValor(Integer valor) {
+	public void setValor(double valor) {
 		this.valor = valor;
 	}
 
@@ -98,7 +98,16 @@ public class Caixa implements Serializable {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
+		result = prime * result + ((dataInsercao == null) ? 0 : dataInsercao.hashCode());
+		result = prime * result + ((descricao == null) ? 0 : descricao.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		result = prime * result + ((insercao == null) ? 0 : insercao.hashCode());
+		result = prime * result + ((tipoPagamento == null) ? 0 : tipoPagamento.hashCode());
+		long temp;
+		temp = Double.doubleToLongBits(valor);
+		result = prime * result + (int) (temp ^ (temp >>> 32));
+		temp = Double.doubleToLongBits(valorInicialCaixa);
+		result = prime * result + (int) (temp ^ (temp >>> 32));
 		return result;
 	}
 
@@ -111,12 +120,37 @@ public class Caixa implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		Caixa other = (Caixa) obj;
+		if (dataInsercao == null) {
+			if (other.dataInsercao != null)
+				return false;
+		} else if (!dataInsercao.equals(other.dataInsercao))
+			return false;
+		if (descricao == null) {
+			if (other.descricao != null)
+				return false;
+		} else if (!descricao.equals(other.descricao))
+			return false;
 		if (id == null) {
 			if (other.id != null)
 				return false;
 		} else if (!id.equals(other.id))
 			return false;
+		if (insercao == null) {
+			if (other.insercao != null)
+				return false;
+		} else if (!insercao.equals(other.insercao))
+			return false;
+		if (tipoPagamento == null) {
+			if (other.tipoPagamento != null)
+				return false;
+		} else if (!tipoPagamento.equals(other.tipoPagamento))
+			return false;
+		if (Double.doubleToLongBits(valor) != Double.doubleToLongBits(other.valor))
+			return false;
+		if (Double.doubleToLongBits(valorInicialCaixa) != Double.doubleToLongBits(other.valorInicialCaixa))
+			return false;
 		return true;
 	}
 
+	
 }
