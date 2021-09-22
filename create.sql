@@ -1,0 +1,10 @@
+create table caixa (id  bigserial not null, data_insercao timestamp, descricao varchar(255), valor float8 not null, valor_inicial_caixa float8 not null, fk_id_tipo_insercao int8, fk_id_tipo_pagamento int8, primary key (id));
+create table tipo_insercao (id  bigserial not null, nome varchar(255), primary key (id));
+create table tipo_pagamento (id  bigserial not null, nome varchar(255), primary key (id));
+alter table if exists caixa add constraint FKdw0r1ywoyoqts6vw8i9d94i8s foreign key (fk_id_tipo_insercao) references tipo_insercao;
+alter table if exists caixa add constraint FKs6dltyi673gvnrcssootg2ony foreign key (fk_id_tipo_pagamento) references tipo_pagamento;
+create table caixa (id  bigserial not null, data_insercao timestamp, descricao varchar(255), valor float8 not null, valor_inicial_caixa float8 not null, fk_id_tipo_insercao int8, fk_id_tipo_pagamento int8, primary key (id));
+create table tipo_insercao (id  bigserial not null, nome varchar(255), primary key (id));
+create table tipo_pagamento (id  bigserial not null, nome varchar(255), primary key (id));
+alter table if exists caixa add constraint FKdw0r1ywoyoqts6vw8i9d94i8s foreign key (fk_id_tipo_insercao) references tipo_insercao;
+alter table if exists caixa add constraint FKs6dltyi673gvnrcssootg2ony foreign key (fk_id_tipo_pagamento) references tipo_pagamento;
